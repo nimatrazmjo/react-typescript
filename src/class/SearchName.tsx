@@ -17,14 +17,23 @@ class SearchName extends Component<SearchNameProps> {
         user: undefined
     }
 
+    Click = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        const foundUser = this.props.users.find(user => user.name ==this.state.name);
+        this.setState({user: foundUser});
+        
+    }
+
     render(): ReactNode {
 
         return (
-            <div>
+            <div className="search-user">
+            <input type="text" name="search" value={this.state.name} id="search" onChange={e => this.setState({name:e.target.value})} />
+            <button onClick={this.Click}> Search </button>
 
-                {this.props.users}
-                {this.state.name}
-            </div>
+            <h3>User Details</h3>
+            <div> {this.state.user && this.state.user.name}</div>
+            <div> {this.state.user && this.state.user.age}</div>
+        </div>
         )
     }
 }
